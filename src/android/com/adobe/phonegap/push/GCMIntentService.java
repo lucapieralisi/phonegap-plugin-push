@@ -208,8 +208,8 @@ public class GCMIntentService extends GcmListenerService implements PushConstant
             createNotification(context, extras);
         } else {
             Log.d(LOG_TAG, "send notification event");
-            PushPlugin.sendExtras(extras);
         }
+        PushPlugin.sendExtras(extras);
     }
 
     public void createNotification(Context context, Bundle extras) {
