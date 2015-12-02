@@ -28,7 +28,8 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
 
     private static CallbackContext pushContext;
     private static CordovaWebView gWebView;
-    private static Bundle gCachedExtras = null;
+    private static Array 
+    private static ArrayList<Bundle> gCachedExtras = new ArrayList<Bundle>();
     private static boolean gForeground = false;
 
     /**
@@ -119,10 +120,13 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
                         editor.commit();
                     }
 
-                    if (gCachedExtras != null) {
+                    if (gCachedExtras != null && gCachedExtras.size()>0) {
+
+                        for (int i = 0; i < gCachedExtras.size(); i++) {
+                            sendExtras(gCachedExtras.get(i));
+                        }
                         Log.v(LOG_TAG, "sending cached extras");
-                        sendExtras(gCachedExtras);
-                        gCachedExtras = null;
+                        gCachedExtras.clear();
                     }
                 }
             });
@@ -188,7 +192,7 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
                 sendEvent(convertBundleToJson(extras));
             } else {
                 Log.v(LOG_TAG, "sendExtras: caching extras to send at a later time.");
-                gCachedExtras = extras;
+                gCachedExtras.add(extras);
             }
         }
     }
