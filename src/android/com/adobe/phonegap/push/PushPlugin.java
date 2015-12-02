@@ -29,7 +29,6 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
 
     private static CallbackContext pushContext;
     private static CordovaWebView gWebView;
-    private static Array 
     private static ArrayList<Bundle> gCachedExtras = new ArrayList<Bundle>();
     private static boolean gForeground = false;
 
